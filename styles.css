@@ -1,0 +1,38 @@
+body {
+    background-color: #E6E6FA; /* Light purple */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #A78BFA; /* Darker purple for contrast */
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 50px;
+}
+
+img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%; /* Makes it circular */
+}
