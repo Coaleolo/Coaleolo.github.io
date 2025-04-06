@@ -1,38 +1,132 @@
+/* General Styles */
 body {
-    background-color: #E6E6FA; /* Light purple */
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
     margin: 0;
     padding: 0;
 }
 
+/* Header and Navbar */
 header {
-    background-color: #A78BFA; /* Darker purple for contrast */
-    padding: 15px;
+    background-color: #6a1b9a; /* Deep purple */
+    color: #fff;
+}
+
+.navbar {
+    padding: 1rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #e1bee7; /* Light purple */
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #fff; /* White on hover */
+}
+
+.navbar-toggler {
+    border-color: #e1bee7;
+}
+
+.navbar-toggler-icon {
+    background-color: #e1bee7;
+}
+
+/* Section Headings */
+h1 {
+    color: #4a148c; /* Darker purple */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Biography Section */
+#biography {
+    background-color: #ede7f6; /* Light lavender */
+    color: #4a148c;
+}
+
+#biography img {
+    border: 5px solid #6a1b9a; /* Purple border around the image */
+    border-radius: 10px;
+}
+
+/* Artifacts Section */
+#artifacts {
+    background-color: #f3e5f5; /* Light purple */
+}
+
+#artifacts h2 {
+    color: #6a1b9a;
+}
+
+#artifacts p {
+    color: #333;
+}
+
+/* Skills Section */
+#skills {
+    background-color: #ede7f6;
+}
+
+.list-group-item {
+    background-color: #f3e5f5;
+    color: #4a148c;
+    border: none;
+}
+
+.list-group-item:hover {
+    background-color: #d1c4e9; /* Slightly darker purple */
+}
+
+/* Resume Section */
+#resume {
+    background-color: #f3e5f5;
+    color: #4a148c;
+}
+
+#resume p {
+    margin-bottom: 0.5rem;
+}
+
+/* Contact Section */
+#contact {
+    background-color: #6a1b9a;
+    color: #fff;
+}
+
+#contact a {
+    color: #e1bee7;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Footer (Optional) */
+footer {
+    background-color: #4a148c;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+/* Utility Classes */
+.text-center {
     text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-section {
-    padding: 50px;
-}
-
-img {
-    width: 150px;
-    height: auto;
-    border-radius: 50%; /* Makes it circular */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
