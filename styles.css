@@ -1,10 +1,11 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif; /* Use a system font */
     background-color: #f8f9fa; /* Light background for contrast */
     color: #333; /* Dark text for readability */
     margin: 0;
     padding: 0;
+    line-height: 1.6; /* Improve text readability */
 }
 
 /* Header and Navbar */
@@ -13,102 +14,138 @@ header {
     color: #fff;
 }
 
+/* Navbar */
 .navbar {
+    background: linear-gradient(90deg, #6a1b9a, #8e24aa); /* Gradient background */
     padding: 1rem;
 }
 
 .navbar-brand {
     font-weight: bold;
     color: #fff;
+    font-size: 1.5rem;
 }
 
 .navbar-nav .nav-link {
-    color: #e1bee7; /* Light purple */
+    color: #ffffff; /* Changed from #e1bee7 (light pink) to white for better contrast */
     transition: color 0.3s ease;
+    font-size: 1rem;
 }
 
-.navbar-nav .nav-link:hover {
-    color: #fff; /* White on hover */
-}
-
-.navbar-toggler {
-    border-color: #e1bee7;
-}
-
-.navbar-toggler-icon {
-    background-color: #e1bee7;
-}
-
-/* Section Headings */
-h1 {
-    color: #4a148c; /* Darker purple */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #ffcc00; /* Added a bright yellow hover color for better visibility */
     font-weight: bold;
-    margin-bottom: 1rem;
 }
 
 /* Biography Section */
 #biography {
-    background-color: #ede7f6; /* Light lavender */
+    background: linear-gradient(135deg, #ede7f6, #f3e5f5); /* Gradient background */
     color: #4a148c;
+    padding: 2rem 0;
 }
 
 #biography img {
-    border: 5px solid #6a1b9a; /* Purple border around the image */
+    border: 5px solid #6a1b9a;
     border-radius: 10px;
+    max-width: 50%; /* Reduced from 60% to 50% */
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease; /* Animation */
+}
+
+#biography img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
 }
 
 /* Artifacts Section */
 #artifacts {
-    background-color: #f3e5f5; /* Light purple */
+    background-color: #f3e5f5;
+    padding: 2rem 0;
 }
 
-#artifacts h2 {
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
     color: #6a1b9a;
 }
 
-#artifacts p {
-    color: #333;
+.card-text {
+    font-size: 1rem;
+    color: #555;
 }
 
 /* Skills Section */
 #skills {
+    background: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png'); /* Subtle pattern */
     background-color: #ede7f6;
+    padding: 2rem 0;
 }
 
 .list-group-item {
     background-color: #f3e5f5;
     color: #4a148c;
     border: none;
+    font-size: 1rem;
 }
 
 .list-group-item:hover {
-    background-color: #d1c4e9; /* Slightly darker purple */
+    background-color: #d1c4e9;
 }
 
-/* Resume Section */
-#resume {
-    background-color: #f3e5f5;
+.list-group-item button {
+    color: #6a1b9a;
+    font-size: 1.2rem;
+}
+
+.list-group-item button:hover {
     color: #4a148c;
-}
-
-#resume p {
-    margin-bottom: 0.5rem;
 }
 
 /* Contact Section */
 #contact {
-    background-color: #6a1b9a;
+    background: linear-gradient(90deg, #6a1b9a, #8e24aa);
     color: #fff;
+    padding: 2rem 0;
 }
 
 #contact a {
     color: #e1bee7;
     text-decoration: none;
+    font-size: 1.1rem;
 }
 
 #contact a:hover {
     color: #fff;
     text-decoration: underline;
+}
+
+#contact .social-icons {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#contact .social-icons a {
+    margin: 0 10px;
+    color: #e1bee7;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+#contact .social-icons a:hover {
+    color: #fff;
 }
 
 /* Footer (Optional) */
@@ -118,6 +155,7 @@ footer {
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem;
+    font-size: 1rem;
 }
 
 /* Utility Classes */
@@ -129,4 +167,42 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    #biography img {
+        max-width: 80%; /* Adjust portrait size for smaller screens */
+    }
+
+    .card-body {
+        font-size: 0.9rem; /* Adjust card text size for smaller screens */
+    }
+}
+/* Portrait Image */
+.portrait-img {
+    max-width: 75%; /* Adjust the size as needed */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Artifact Section */
+.card {
+    border: none; /* Optional: Remove card borders */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
 }
