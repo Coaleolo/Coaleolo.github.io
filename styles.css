@@ -206,3 +206,14 @@ footer {
     font-size: 1rem;
     color: #555;
 }
+/* CSS for enlarging images */
+.enlargeable {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.enlargeable.enlarged {
+    transform: scale(2); /* Enlarge the image */
+    z-index: 1000;
+    position: relative;
+}
