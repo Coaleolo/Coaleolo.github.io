@@ -74,6 +74,11 @@ nav a:hover{color:var(--ink);background:var(--surface)}
 .art-grid{columns:3 240px;column-gap:20px}
 .art-grid button{display:block;width:100%;margin:0 0 20px;padding:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface);cursor:pointer;break-inside:avoid}
 .art-grid img{width:100%;height:auto}
+.thumb.sq{aspect-ratio:1/1}
+.thumb img.sq,.art-grid img.sq{object-fit:cover;object-position:top}
+.art-grid img.sq{aspect-ratio:1/1}
+.stage.sq{aspect-ratio:1/1;display:block;overflow-y:auto}
+.stage.sq img{height:auto;object-fit:initial}
 
 /* resume */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
@@ -255,7 +260,7 @@ const projects = [
   { id:"narr", cat:"games", title:"Interactive Narrative App", role:"Designer / Developer", date:"",
     summary:"A ground-up redesign with branching, player-driven stories.",
     bullets:["Rebuilt an app experience from the ground up, with branching narrative paths and player-driven outcomes.","Image shows one redesigned portion of the app."],
-    tools:["Unity","Narrative Design","Dialogue Systems","C#"], media:[{type:"image",src:"Demon.png",alt:"Redesigned narrative app screen"}] },
+    tools:["Unity","Narrative Design","Dialogue Systems","C#"], media:[{type:"image",src:"Demon.png",alt:"Redesigned narrative app screen",sq:true}] },
   { id:"novel", cat:"writing", title:"Original Fantasy Light Novel", role:"Author", date:"",
     summary:"Long-form fantasy with structured worldbuilding and lore.",
     bullets:["Long-form fantasy narrative with structured worldbuilding, comprehensive character profiles, and lore systems.","Refined through peer and instructor critique."],
@@ -274,7 +279,7 @@ const projects = [
 const art = [
   {title:"Floating House", src:"Floating_House.png"},
   {title:"Rock Monster and rig", src:"RockMonsterAnny.png"},
-  {title:"Interactive narrative scene", src:"Demon.png"},
+  {title:"Interactive narrative scene", src:"Demon.png", sq:true},
   {title:"Atomic structure sprites", src:"Finished_bread_renderer.png"},
   {title:"Novel, page one", src:"Page_one.png"},
 ];
@@ -332,7 +337,7 @@ function drawGrid(){
   $("#grid").innerHTML = list.map(p => {
     const m = p.media.find(x => x.type==="image");
     return `<button class="card" type="button" data-id="${p.id}">
-      <div class="thumb">${m ? `<img src="${esc(m.src)}" alt="${esc(m.alt||p.title)}" loading="lazy">` : esc(p.title)}</div>
+      <div class="thumb${m&&m.sq?" sq":""}">${m ? `<img class="${m.sq?"sq":""}" src="${esc(m.src)}" alt="${esc(m.alt||p.title)}" loading="lazy">` : esc(p.title)}</div>
       <div class="meta"><span class="tag">${esc(cats[p.cat])}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div></button>`;
   }).join("");
   $("#grid").querySelectorAll(".card").forEach(c => c.onclick = () => openProject(projects.find(p => p.id===c.dataset.id)));
@@ -340,16 +345,18 @@ function drawGrid(){
 
 /* art grid */
 $("#artGrid").innerHTML = art.map((a,i) =>
-  `<button type="button" data-i="${i}" aria-label="View ${esc(a.title)}"><img src="${esc(a.src)}" alt="${esc(a.title)}" loading="lazy"></button>`).join("");
+  `<button type="button" data-i="${i}" aria-label="View ${esc(a.title)}"><img class="${a.sq?"sq":""}" src="${esc(a.src)}" alt="${esc(a.title)}" loading="lazy"></button>`).join("");
 $("#artGrid").querySelectorAll("button").forEach(b => b.onclick = () => {
   const a = art[b.dataset.i];
-  openProject({title:a.title, role:"Art", bullets:[], tools:[], media:[{type:"image",src:a.src,alt:a.title}]});
+  openProject({title:a.title, role:"Art", bullets:[], tools:[], media:[{type:"image",src:a.src,alt:a.title,sq:a.sq}]});
 });
 
 /* modal */
 const modal = $("#modal");
 function showMedia(m, title){
   const s = $("#stage");
+  s.classList.toggle("sq", !!(m && m.sq));
+  s.scrollTop = 0;
   if(!m){ s.innerHTML = `<div class="ph">${esc(title)}</div>`; return; }
   if(m.type==="video") s.innerHTML = `<video controls preload="metadata" ${m.poster?`poster="${esc(m.poster)}"`:""} src="${esc(m.src)}"></video>`;
   else if(m.type==="embed") s.innerHTML = `<iframe src="${esc(m.src)}" title="${esc(title)}" allowfullscreen loading="lazy"></iframe>`;
@@ -400,4 +407,4 @@ function drawResume(){
 drawChips(); drawGrid(); drawResume();
 </script>
 </body>
-</html> 
+</html>
