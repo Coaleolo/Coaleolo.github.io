@@ -1,239 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cole Carrillo's Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <meta name='viewport' content='width=device-width, initial-scale=1' /> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cole Carrillo — 2D Artist, Game Developer, AI Builder</title>
+<meta name="description" content="Portfolio of Cole Carrillo: 2D art, character design, Unity games, and local AI systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f8; --surface:#ffffff; --ink:#10252c; --muted:#53666d; --line:#d9e0e4;
+  --accent:#0b7a85; --accent-ink:#ffffff; --gold:#e0a62e;
+  --r-lg:20px; --r-md:12px; --r-sm:8px;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0d1a1f;--surface:#15272e;--ink:#e8f0f2;--muted:#9bb0b7;--line:#27404a;--accent:#4cc3cf;--accent-ink:#06161a;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0d1a1f;--surface:#15272e;--ink:#e8f0f2;--muted:#9bb0b7;--line:#27404a;--accent:#4cc3cf;--accent-ink:#06161a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:8px}
+.lede{color:var(--muted);max-width:60ch;margin:0 0 32px}
+section{padding:88px 0}
+
+/* nav */
+header.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{font:700 1.1rem var(--display);text-decoration:none;color:var(--ink)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:var(--r-sm);font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--ink);background:var(--surface)}
+#theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--r-sm);padding:6px 10px;cursor:pointer;font:inherit;font-size:.9rem}
+
+/* hero */
+.hero{padding:96px 0 72px}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);max-width:14ch}
+.hero p{font-size:1.25rem;color:var(--muted);max-width:52ch;margin:24px 0 32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:var(--r-md);font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+.facts{display:flex;gap:32px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+.facts strong{display:block;color:var(--ink);font-weight:600}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:48px;align-items:start}
+.about img{border-radius:var(--r-lg);width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--line)}
+.about p{max-width:62ch;margin:0 0 16px}
+
+/* filters + cards */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer;font:500 .95rem var(--body)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.thumb{aspect-ratio:16/10;background:linear-gradient(135deg,var(--accent),#17323b);display:grid;place-items:center;color:#fff;font:700 1.3rem var(--display);padding:16px;text-align:center}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.card .meta{padding:18px 20px 22px}
+.card h3{font-size:1.25rem;margin-bottom:6px}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.tag{display:inline-block;font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:6px}
+.art-grid{columns:3 240px;column-gap:20px}
+.art-grid button{display:block;width:100%;margin:0 0 20px;padding:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface);cursor:pointer;break-inside:avoid}
+.art-grid img{width:100%;height:auto}
+
+/* resume */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:32px}
+.panel h3{font-size:1.5rem;margin-bottom:4px}
+.panel h4{font:600 1rem var(--body);margin:24px 0 8px;color:var(--accent)}
+.panel ul{margin:0;padding-left:20px}
+.panel li{margin-bottom:6px}
+.role{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:600;margin-top:14px}
+.role span{color:var(--muted);font-weight:400}
+.panel .top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:start}
+
+/* contact + footer */
+.contact a.big{font:700 clamp(1.4rem,4vw,2.4rem) var(--display);word-break:break-all}
+footer{padding:32px 0 56px;color:var(--muted);border-top:1px solid var(--line);font-size:.9rem}
+
+/* modal */
+dialog{border:0;padding:0;width:min(960px,94vw);max-height:92vh;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);overflow:auto}
+dialog::backdrop{background:rgba(5,15,18,.7)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.close{position:sticky;top:12px;float:right;margin:12px 12px 0 0;z-index:2;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.3rem;cursor:pointer}
+.stage{background:#0a1418;aspect-ratio:16/9;display:grid;place-items:center}
+.stage img,.stage video{width:100%;height:100%;object-fit:contain}
+.stage iframe{width:100%;height:100%;border:0}
+.stage .ph{color:#fff;font:700 1.6rem var(--display);padding:24px;text-align:center;background:linear-gradient(135deg,var(--accent),#17323b);width:100%;height:100%;display:grid;place-items:center}
+.thumbs{display:flex;gap:10px;padding:12px 24px 0;overflow-x:auto}
+.thumbs button{flex:0 0 96px;height:60px;padding:0;border:2px solid transparent;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;background:var(--line);color:var(--ink);font-size:.8rem}
+.thumbs button[aria-current="true"]{border-color:var(--accent)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.body{padding:24px 32px 36px}
+.body h2{font-size:2rem}
+.body .role-line{color:var(--muted);margin:0 0 16px}
+.body ul{padding-left:20px;margin:0 0 20px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pills span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85rem;color:var(--muted)}
+
+@media (max-width:720px){
+  .about{grid-template-columns:1fr}
+  nav a{padding:6px 8px;font-size:.88rem}
+  section{padding:64px 0}
+  .brand{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">Portfolio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#biography">Biography</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#artifacts">Artifacts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-    <section id="biography" class="py-5">
-        <div class="container">
-            <h1 class="text-center">About Me</h1>
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <img src="Portrate Picture.JPG" alt="Photo of Cole Carrillo" class="img-fluid portrait-img">
-                </div>
-            </div>
-            <p class="mt-4 text-center">My name is Cole Carrillo. I'm a passionate 3D artist, animator, and game developer specializing in character modeling, cinematic animation, and educational interactive media. With expertise in Blender, Maya, Unity, and professional asset pipelines, I create compelling visual narratives that educate and engage audiences of all ages. I'm also skilled in business strategy and team leadership.</p>
-        </div>
-    </section>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Cole Carrillo</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a><a href="#art">Art</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a>
+    </nav>
+    <button id="theme" type="button" aria-label="Toggle dark mode">Theme</button>
+  </div>
+</header>
 
-    <section id="artifacts" class="py-5 bg-light">
-        <div class="container">
-            <h1 class="text-center">Artifacts</h1>
-            <div class="row g-4">
-                <div class="col-md-4 d-flex">
-                    <div class="card w-100">
-                        <img src="Floating_House.png" alt="Floating House Animation" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">Floating House Animation</h2>
-                            <p class="card-text">Stylized floating environment with particle systems and cinematic motion design. This image is a screenshot from the work process and demonstrates environmental storytelling and mood composition.</p>
-                            <p><strong>Technologies Used:</strong> Blender, Modeling, Particle Systems, Animation, Lighting</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex">
-                    <div class="card w-100">
-                        <img src="GameView.png" alt="3D Solo Game Project" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">3D Solo Game Development</h2>
-                            <p class="card-text">Complete game project demonstrating full asset creation pipeline: custom models, environments, textures, animations, and Unity integration.</p>
-                            <p><strong>Technologies Used:</strong> 3D Modeling, Texturing, Animation, Unity, Level Design, VFX</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex">
-                    <div class="card w-100">
-                        <img src="Finished_bread_renderer.png" alt="Educational Game - Atomic Structure" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">Educational Game – Atomic Structure</h2>
-                            <p class="card-text">Story-driven Unity game teaching atomic structure through interactive narrative and custom sprite animations. Collaborative team project with art direction and narrative design.</p>
-                            <p><strong>Technologies Used:</strong> Unity, Sprite Animation, Art Direction, Narrative Design, Adobe Animate</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- New Button -->
-            <div class="text-center mt-4">
-                <a href="Artifacts.html" class="btn btn-primary">View All Artifacts</a>
-            </div>
-        </div>
-    </section>
-    
-    <section id="skills" class="py-5">
-        <div class="container">
-            <h1 class="text-center">🎯 Core Skills</h1>
-            <ul class="list-group list-group-flush">
-                <!-- 3D Art & Animation (PRIMARY) -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        🧱 3D Art & Animation (Expert)
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill1" aria-expanded="false" aria-controls="skill1">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill1" class="collapse">
-                        <p class="mt-2"><strong>Tools:</strong> Blender, Maya</p>
-                        <p><strong>Skills:</strong> Sculpting, High/Low Poly Modeling, Retopology, UV Mapping, PBR Texturing (Substance Painter, Blender, Photoshop), Rigging (Mechanical & Organic), IK/FK Setup, Keyframe Animation, Cinematic Composition, Lighting, Rendering, Asset Integration into Unity</p>
-                        <p><strong>Experience:</strong> Complete 3D pipeline from concept to game-ready assets. Proficient in creating stylized characters, environments, and animations optimized for real-time performance.</p>
-                    </div>
-                </li>
-                <!-- Game Development -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        🎮 Game Development & Asset Pipeline
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill2" aria-expanded="false" aria-controls="skill2">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill2" class="collapse">
-                        <p class="mt-2"><strong>Engines:</strong> Unity (Advanced), Unreal Engine (Beginner)</p>
-                        <p><strong>Skills:</strong> 3D animation systems, asset integration, animation controllers, VFX, gameplay mechanics, level design, prefab management, shader basics</p>
-                        <p><strong>Experience:</strong> Developed multiple games from prototype to completion. Skilled in managing complex asset workflows and optimizing performance for various platforms.</p>
-                    </div>
-                </li>
-                <!-- 2D Art & Animation -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        🎨 2D Art & Animation
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill3" aria-expanded="false" aria-controls="skill3">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill3" class="collapse">
-                        <p class="mt-2"><strong>Tools:</strong> Adobe Animate, Adobe Photoshop, Clip Studio Paint</p>
-                        <p><strong>Skills:</strong> Character design, sprite animation, storyboarding, UI/UX design, visual composition, color theory</p>
-                        <p><strong>Experience:</strong> Created all visual assets for educational and narrative games. Designed comprehensive art direction for collaborative team projects.</p>
-                    </div>
-                </li>
-                <!-- Narrative Design & Worldbuilding -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        📖 Narrative Design & Worldbuilding
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill4" aria-expanded="false" aria-controls="skill4">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill4" class="collapse">
-                        <p class="mt-2"><strong>Skills:</strong> Story structure, character development, branching narratives, dialogue systems, lore creation, worldbuilding, thematic consistency</p>
-                        <p><strong>Experience:</strong> Wrote and designed multiple games with player-driven outcomes. Created educational narratives that simplify complex concepts for all ages. Developed long-form fantasy fiction with intricate world systems.</p>
-                    </div>
-                </li>
-                <!-- Project Management & Leadership -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        📊 Project Management & Leadership
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill5" aria-expanded="false" aria-controls="skill5">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill5" class="collapse">
-                        <p class="mt-2"><strong>Skills:</strong> Team coordination, documentation, scheduling, budget management, stakeholder communication, cross-functional collaboration, asset organization</p>
-                        <p><strong>Experience:</strong> Led club initiatives and team projects. Managed documentation systems for multi-person teams. Presented work to students and faculty. Coordinated resources across design, art, and development teams.</p>
-                    </div>
-                </li>
-                <!-- Business & Financial Skills -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        💼 Business Strategy & Finance
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill6" aria-expanded="false" aria-controls="skill6">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill6" class="collapse">
-                        <p class="mt-2"><strong>Tools:</strong> Microsoft Excel, PowerPoint</p>
-                        <p><strong>Skills:</strong> Financial analysis, budget planning, stakeholder meeting facilitation, idea organization, project cost estimation, business strategy development</p>
-                        <p><strong>Experience:</strong> Minor in Business. Managed club finances as Financial Advisor. Analyzed complex financial data to optimize business outcomes. Compiled stakeholder input into structured documentation for decision-making.</p>
-                    </div>
-                </li>
-                <!-- Programming & Technical -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        💻 Programming & Technical Skills
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill7" aria-expanded="false" aria-controls="skill7">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill7" class="collapse">
-                        <p class="mt-2"><strong>Languages:</strong> C#, JavaScript, HTML, CSS, Embedded C</p>
-                        <p><strong>Tools:</strong> Git, GitHub, Adobe Premiere Pro</p>
-                        <p><strong>Experience:</strong> Scripted game mechanics in C#. Built portfolio website with HTML/CSS/JavaScript. Version control management with Git. Video editing for game trailers and documentation.</p>
-                    </div>
-                </li>
-                <!-- Communication & Soft Skills -->
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        🗣️ Communication & Soft Skills
-                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#skill8" aria-expanded="false" aria-controls="skill8">
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="skill8" class="collapse">
-                        <p class="mt-2"><strong>Skills:</strong> Public speaking, presentations, written communication, team collaboration, creative problem-solving, adaptability, leadership, interpersonal connection</p>
-                        <p><strong>Experience:</strong> Club President managing diverse teams. Presented projects to students and faculty. Facilitated team meetings and creative workshops. Bridge builder between technical and creative disciplines.</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="resume" class="py-5 bg-light">
-        <div class="container">
-            <h1 class="text-center">Resume</h1>
-            <p><strong>Education:</strong></p>
-            <p>Boise State University – Boise, ID</p>
-            <p>Bachelor of Science in Games, Interactive Media & Mobile (Minor in Business)</p>
-            <p>Expected Graduation: Spring 2027 | High Honors Student</p>
-            <p><strong>Leadership & Extracurricular Activities:</strong></p>
-            <ul>
-                <li>President, Anime Club – Boise State University</li>
-                <li>Financial Advisor, Men's Basketball Club – Boise State University</li>
-                <li>Founder, Men's Basketball Club – Boise State University</li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="contact" class="py-5">
-        <div class="container">
-            <h1 class="text-center">Contact</h1>
-            <p class="text-center">Email: <a href="/cdn-cgi/l/email-protection#2a4945464f40494b5858434646456a4d474b434604494547"><span class="__cf_email__" data-cfemail="abc8c4c7cec1c8cad9d9c2c7c7c4ebccc6cac2c785c8c4c6">[email&#160;protected]</span></a></p>
-            <p class="text-center">LinkedIn: <a href="https://www.linkedin.com/in/colecarrillo" target="_blank">www.linkedin.com/in/colecarrillo</a></p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/colecarrillo" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                <a href="mailto:[email&#160;protected]" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
-            </div>
-        </div>
-    </section>
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <h1>I draw characters and build the systems that bring them to life.</h1>
+    <p>2D artist, Unity developer, and local AI builder studying Games, Interactive Media &amp; Mobile at Boise State.</p>
+    <div class="btns">
+      <a class="btn primary" href="#work">See my work</a>
+      <a class="btn" href="#resume">View resumes</a>
+    </div>
+    <div class="facts">
+      <div><strong>Boise State University</strong>B.S. Games, Interactive Media &amp; Mobile, expected Spring 2027</div>
+      <div><strong>High Honors</strong>Minor in Business, AI Literacy certificate</div>
+      <div><strong>Currently</strong>Pirate co-op game, VTuber character, Bufo AI</div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p class="mb-0 text-center">I made this entire website.</p>
-        </div>
-    </footer>
+<section id="work" style="padding-top:24px">
+  <div class="wrap">
+    <h2>Selected work</h2>
+    <p class="lede">Select a project to see the full write-up, more images, and video.</p>
+    <div class="chips" role="group" aria-label="Filter projects" id="chips"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="art" style="background:var(--surface)">
+  <div class="wrap">
+    <h2>Art</h2>
+    <p class="lede">Character designs, sprites, and illustration. Select any piece to view it larger.</p>
+    <div class="art-grid" id="artGrid"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <img src="Portrate Picture.JPG" alt="Portrait of Cole Carrillo">
+    <div>
+      <h2>About</h2>
+      <p>I'm a 2D artist and game developer who also writes the code behind what I draw. I design characters from concept through layered, rig-ready art, then bring them into Unity and connect them to local AI systems.</p>
+      <p>I've led art direction on team games, built an accessible custom controller, redesigned an interactive narrative app, and shipped a company website as an intern. I enjoy working between artists and engineers.</p>
+      <p>Outside of class I run creative workshops and peer critiques as president of the Anime Club, and I've managed budgets for a student club.</p>
+    </div>
+  </div>
+</section>
+
+<section id="resume" style="background:var(--surface)">
+  <div class="wrap">
+    <h2>Resume</h2>
+    <p class="lede">Three versions, each focused on a different kind of role. Pick one to read it here or download the PDF.</p>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="lede">Open to internships, freelance art, and game or AI projects.</p>
+    <p><a class="big" href="mailto:colejcarrillo@gmail.com">colejcarrillo@gmail.com</a></p>
+    <div class="btns">
+      <a class="btn" href="https://www.linkedin.com/in/colecarrillo/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 Cole Carrillo. Designed and built by me.</div></footer>
+
+<dialog id="modal" aria-labelledby="mTitle">
+  <button class="close" id="mClose" aria-label="Close">×</button>
+  <div class="stage" id="stage"></div>
+  <div class="thumbs" id="thumbs"></div>
+  <div class="body">
+    <h2 id="mTitle"></h2>
+    <p class="role-line" id="mRole"></p>
+    <ul id="mBullets"></ul>
+    <div class="pills" id="mTools"></div>
+  </div>
+</dialog>
+
+<script>
+/* ============ EDIT YOUR CONTENT HERE ============
+   media types: "image" (src), "video" (src, optional poster), "embed" (src = YouTube/Vimeo embed URL)
+   Projects with an empty media list show a colored placeholder until you add files. */
+const projects = [
+  { id:"pirate", cat:"games", title:"Cooperative Pirate Game", role:"Lead Creative / 2D Artist", date:"Summer 2026 – Present",
+    summary:"Four-person Unity game with an accessible custom controller.",
+    bullets:["Lead visual direction and create all 2D art (characters, environments, gameplay, UI) for a four-person team.","Contribute to accessibility design, including a custom controller for a player with a disability."],
+    tools:["Unity","2D Art","UI Design","Accessibility"], media:[
+      // {type:"image", src:"Pirate_1.png", alt:"Pirate game characters"},
+      // {type:"video", src:"pirate_demo.mp4"},
+    ]},
+  { id:"vtuber", cat:"art", title:"Full-Body VTuber Character", role:"2D Artist / Character Designer", date:"Summer 2026 – Present",
+    summary:"A full character from concept to rig-ready layered art.",
+    bullets:["Designed and illustrated a full-body character from concept to production, with layered art built for rigging and real-time animation.","Integrating the character into Unity alongside a custom local AI system."],
+    tools:["Clip Studio Paint","Photoshop","Rigging Prep","Unity"], media:[] },
+  { id:"bufo", cat:"ai", title:"Bufo: Local AI Character System", role:"AI & Interactive Systems Developer", date:"2026 – Present",
+    summary:"A self-hosted AI character with its own personality and memory.",
+    bullets:["Built a local self-hosted AI character with a unique personality and memory.","Integrated the AI with Discord, Spotify, voice, and Unity."],
+    tools:["Local LLMs","Python","Unity","Discord","Spotify","Voice"], media:[] },
+  { id:"nursing", cat:"ai", title:"AI Nursing Simulation App", role:"AI Developer / LLM Integration", date:"2026 – Present",
+    summary:"An AI practice partner for standardized patient actors.",
+    bullets:["Building an AI app to help standardized patient actors prepare for nursing simulations.","Created an interactive AI nurse that processes training materials and evaluates responses.","Developed feedback logic for realistic practice."],
+    tools:["LLM Integration","Prompt Design","Feedback Logic"], media:[] },
+  { id:"edu", cat:"games", title:"Educational Game: Atomic Structure", role:"Lead Visual Development", date:"Spring 2024",
+    summary:"Story-driven Unity game that teaches atomic structure.",
+    bullets:["Designed and animated all 2D sprites; set character designs, color palettes, and visual guidelines for a cohesive art direction.","Produced a 20-second Adobe Animate intro; presented visual decisions to students and faculty."],
+    tools:["Unity","Adobe Animate","Sprite Animation","Art Direction"], media:[{type:"image",src:"Finished_bread_renderer.png",alt:"Atomic structure game art"}] },
+  { id:"house", cat:"art", title:"Floating House Animation", role:"3D Artist / Animator", date:"",
+    summary:"Stylized floating environment with particles and cinematic motion.",
+    bullets:["Stylized floating environment with particle systems and cinematic motion design.","Screenshot from the work process, showing environmental storytelling and mood composition."],
+    tools:["Blender","Particle Systems","Animation","Lighting"], media:[{type:"image",src:"Floating_House.png",alt:"Floating house in Blender"}] },
+  { id:"rock", cat:"art", title:"Rock Monster Animation", role:"3D Artist / Animator", date:"",
+    summary:"Animated rock creature with object interaction and emotion.",
+    bullets:["Complete 3D animated sequence with nuanced actions, object interaction, and emotional storytelling through cinematic staging.","Shot shows both the monster and the skeleton used to build and animate it."],
+    tools:["Blender","Rigging","Keyframe Animation","Lighting","Unity"], media:[{type:"image",src:"RockMonsterAnny.png",alt:"Rock monster and rig"}] },
+  { id:"solo", cat:"games", title:"3D Solo Game", role:"Solo Developer", date:"",
+    summary:"Full asset pipeline from models to Unity integration.",
+    bullets:["Complete game project covering custom models, environments, textures, animations, and Unity integration."],
+    tools:["3D Modeling","Texturing","Unity","Level Design","VFX"], media:[{type:"image",src:"GameView.png",alt:"3D solo game screenshot"}] },
+  { id:"narr", cat:"games", title:"Interactive Narrative App", role:"Designer / Developer", date:"",
+    summary:"A ground-up redesign with branching, player-driven stories.",
+    bullets:["Rebuilt an app experience from the ground up, with branching narrative paths and player-driven outcomes.","Image shows one redesigned portion of the app."],
+    tools:["Unity","Narrative Design","Dialogue Systems","C#"], media:[{type:"image",src:"Demon.png",alt:"Redesigned narrative app screen"}] },
+  { id:"novel", cat:"writing", title:"Original Fantasy Light Novel", role:"Author", date:"",
+    summary:"Long-form fantasy with structured worldbuilding and lore.",
+    bullets:["Long-form fantasy narrative with structured worldbuilding, comprehensive character profiles, and lore systems.","Refined through peer and instructor critique."],
+    tools:["Narrative Design","Worldbuilding","Character Development"], media:[{type:"image",src:"Page_one.png",alt:"First page of the novel"}] },
+  { id:"shoe", cat:"business", title:"Business Simulation: Shoe Shop", role:"Team Member", date:"",
+    summary:"Managed a simulated business with financial analysis.",
+    bullets:["Compiled stakeholder input into structured documentation, analyzed financial data, and optimized strategy and budgeting."],
+    tools:["Excel","Financial Analysis","Project Management"], media:[{type:"image",src:"Shoe_Simulation.png",alt:"Shoe shop simulation"}] },
+  { id:"madduck", cat:"web", title:"Mad Duck Deliveries Website", role:"Web Development Intern", date:"Summer 2026",
+    summary:"Company website led from concept to launch.",
+    bullets:["Led design and development of the company's website from concept to launch, translating business needs into a user-focused experience."],
+    tools:["HTML/CSS","JavaScript","Front-end","Back-end"], media:[] },
+];
+
+/* Art gallery: add any image here. */
+const art = [
+  {title:"Floating House", src:"Floating_House.png"},
+  {title:"Rock Monster and rig", src:"RockMonsterAnny.png"},
+  {title:"Interactive narrative scene", src:"Demon.png"},
+  {title:"Atomic structure sprites", src:"Finished_bread_renderer.png"},
+  {title:"Novel, page one", src:"Page_one.png"},
+];
+
+const cats = {all:"All", games:"Games", art:"Art", ai:"AI & Code", web:"Web", writing:"Writing", business:"Business"};
+
+const resumes = {
+  art:{label:"Art & Design", file:"Cole_Carrillo_Resume_Art.pdf", title:"2D Art / Character Design",
+    projects:[
+      ["Cooperative Pirate Game, Lead Creative / 2D Artist","Summer 2026 – Present",["Lead visual direction and create all 2D art (characters, environments, gameplay, UI) for a four-person team.","Contribute to accessibility design, including a custom controller for a player with a disability."]],
+      ["Full-Body VTuber Character, 2D Artist / Character Designer","Summer 2026 – Present",["Designed and illustrated a full-body character from concept to production, with layered art built for rigging and real-time animation.","Integrating the character into Unity alongside a custom local AI system."]],
+      ["Unity Story-Driven Educational Game, Lead Visual Development","Spring 2024",["Designed and animated all 2D sprites; set character designs, color palettes, and visual guidelines for a cohesive art direction.","Produced a 20-second Adobe Animate intro; presented visual decisions to students and faculty."]]],
+    skills:[["2D Art","Character Design, Illustration, Sprite Art, 2D Animation, Storyboarding, Photoshop, Adobe Animate, Clip Studio Paint"],["Game & Interactive","Unity, Unreal Engine, UI Design, Rigging Prep, Narrative Design, Worldbuilding"],["3D & Technical","Blender, Maya, C#, JavaScript, HTML/CSS, Git/GitHub, Local AI / LLM Integration"],["Professional","Creative Direction, Team Leadership, Project Coordination, Budget Management, Excel, PowerPoint"]],
+    exp:[["Web Development Intern, Mad Duck Deliveries","Summer 2026","Led design and development of the company's website from concept to launch, translating business needs into a user-focused experience."],["Morning Shift Team Member, Einstein Bros. Bagels","Late Summer 2025 – Early Summer 2026",""]],
+    lead:[["President, Anime Club, Boise State","2024 – 2025","Organized creative workshops, peer critiques, and collaborative projects."],["Financial Advisor, Men's Basketball Club","2026","Managed budgeting and coordination with members and university stakeholders."]]},
+  ai:{label:"AI & Development", file:"Cole_Carrillo_Resume_AI.pdf", title:"AI Developer / Interactive Systems",
+    projects:[
+      ["AI-Powered Nursing Simulation App, AI Developer / LLM Integration","2026 – Present",["Building an AI app to help standardized patient actors prepare for nursing simulations.","Created an interactive AI nurse that processes training materials and evaluates responses.","Developed feedback logic for realistic practice."]],
+      ["Bufo, Local AI Character System, AI & Interactive Systems Developer","2026 – Present",["Built a local self-hosted AI character with unique personality and memory.","Integrated AI with Discord, Spotify, voice, and Unity."]],
+      ["Full-Body VTuber Character, Character & Unity Integration","2026 – Present",["Designed a custom 2D character for animation.","Integrated character into Unity with local AI."]],
+      ["Cooperative Pirate Game, Lead Creative / Technical Artist","2026 – Present",["Lead artist for team-built Unity game; created 2D assets and UI.","Developed an accessible custom controller."]]],
+    skills:[["AI & Integration","Local AI, LLMs, Prompt/Personality Design, Voice/Discord/Spotify Integration"],["Development","Unity, C#, JavaScript, HTML/CSS, Git/GitHub"],["Creative","UI & Narrative Design, Project Coordination, Leadership"]],
+    exp:[["Web Development Intern, Mad Duck Deliveries","Summer 2026","Led the company website project from concept to launch, translating business needs into a functional user experience and coordinating front-end and back-end development."]],lead:[]},
+  mix:{label:"Art + AI", file:"Cole_Carrillo_Resume_Mixed.pdf", title:"Technical Artist / Creative Technologist",
+    projects:[
+      ["Cooperative Pirate Game, Lead Creative / 2D Artist","Summer 2026 – Present",["Lead visual direction and create all 2D art (characters, environments, gameplay, UI) for a four-person team.","Contribute to accessibility design, including a custom controller for a player with a disability."]],
+      ["Full-Body VTuber Character, 2D Artist / Character Designer","Summer 2026 – Present",["Designed and illustrated a full-body character from concept to production, with layered art built for rigging and real-time animation.","Integrating the character into Unity alongside a custom local AI system."]],
+      ["Bufo, Local AI Character System, AI & Interactive Systems Developer","2026 – Present",["Built a local self-hosted AI character with a unique personality and memory.","Integrated AI with Discord, Spotify, voice, and Unity."]]],
+    skills:null, exp:null, lead:null}
+};
+resumes.mix.skills=resumes.art.skills; resumes.mix.exp=resumes.art.exp; resumes.mix.lead=resumes.art.lead;
+/* ============ END CONTENT ============ */
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* theme */
+const root = document.documentElement;
+try{const t=localStorage.getItem("theme"); if(t) root.dataset.theme=t;}catch(e){}
+$("#theme").onclick = () => {
+  const dark = (root.dataset.theme || (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light")) === "dark";
+  root.dataset.theme = dark ? "light" : "dark";
+  try{localStorage.setItem("theme", root.dataset.theme);}catch(e){}
+};
+
+/* project grid */
+let filter = "all";
+function drawChips(){
+  $("#chips").innerHTML = Object.entries(cats).map(([k,v]) =>
+    `<button class="chip" type="button" data-k="${k}" aria-pressed="${k===filter}">${v}</button>`).join("");
+  $("#chips").querySelectorAll(".chip").forEach(b => b.onclick = () => { filter=b.dataset.k; drawChips(); drawGrid(); });
+}
+function drawGrid(){
+  const list = projects.filter(p => filter==="all" || p.cat===filter);
+  $("#grid").innerHTML = list.map(p => {
+    const m = p.media.find(x => x.type==="image");
+    return `<button class="card" type="button" data-id="${p.id}">
+      <div class="thumb">${m ? `<img src="${esc(m.src)}" alt="${esc(m.alt||p.title)}" loading="lazy">` : esc(p.title)}</div>
+      <div class="meta"><span class="tag">${esc(cats[p.cat])}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div></button>`;
+  }).join("");
+  $("#grid").querySelectorAll(".card").forEach(c => c.onclick = () => openProject(projects.find(p => p.id===c.dataset.id)));
+}
+
+/* art grid */
+$("#artGrid").innerHTML = art.map((a,i) =>
+  `<button type="button" data-i="${i}" aria-label="View ${esc(a.title)}"><img src="${esc(a.src)}" alt="${esc(a.title)}" loading="lazy"></button>`).join("");
+$("#artGrid").querySelectorAll("button").forEach(b => b.onclick = () => {
+  const a = art[b.dataset.i];
+  openProject({title:a.title, role:"Art", bullets:[], tools:[], media:[{type:"image",src:a.src,alt:a.title}]});
+});
+
+/* modal */
+const modal = $("#modal");
+function showMedia(m, title){
+  const s = $("#stage");
+  if(!m){ s.innerHTML = `<div class="ph">${esc(title)}</div>`; return; }
+  if(m.type==="video") s.innerHTML = `<video controls preload="metadata" ${m.poster?`poster="${esc(m.poster)}"`:""} src="${esc(m.src)}"></video>`;
+  else if(m.type==="embed") s.innerHTML = `<iframe src="${esc(m.src)}" title="${esc(title)}" allowfullscreen loading="lazy"></iframe>`;
+  else s.innerHTML = `<img src="${esc(m.src)}" alt="${esc(m.alt||title)}">`;
+}
+function openProject(p){
+  $("#mTitle").textContent = p.title;
+  $("#mRole").textContent = [p.role, p.date].filter(Boolean).join(" | ");
+  $("#mBullets").innerHTML = p.bullets.map(b => `<li>${esc(b)}</li>`).join("");
+  $("#mTools").innerHTML = p.tools.map(t => `<span>${esc(t)}</span>`).join("");
+  const media = p.media || [];
+  showMedia(media[0], p.title);
+  const th = $("#thumbs");
+  th.innerHTML = media.length > 1 ? media.map((m,i) =>
+    `<button type="button" aria-label="Show ${m.type} ${i+1}" aria-current="${i===0}">${m.type==="image" ? `<img src="${esc(m.src)}" alt="">` : m.type==="video" ? "Video" : "Embed"}</button>`).join("") : "";
+  th.querySelectorAll("button").forEach((b,i) => b.onclick = () => {
+    showMedia(media[i], p.title);
+    th.querySelectorAll("button").forEach(x => x.setAttribute("aria-current","false"));
+    b.setAttribute("aria-current","true");
+  });
+  modal.showModal();
+}
+function closeModal(){ modal.close(); $("#stage").innerHTML=""; }
+$("#mClose").onclick = closeModal;
+modal.addEventListener("click", e => { if(e.target===modal) closeModal(); });
+modal.addEventListener("close", () => { $("#stage").innerHTML=""; });
+
+/* resumes */
+let rKey = "art";
+function drawResume(){
+  $("#tabs").innerHTML = Object.entries(resumes).map(([k,r]) =>
+    `<button class="chip" role="tab" type="button" data-k="${k}" aria-pressed="${k===rKey}" aria-selected="${k===rKey}">${esc(r.label)}</button>`).join("");
+  $("#tabs").querySelectorAll(".chip").forEach(b => b.onclick = () => { rKey=b.dataset.k; drawResume(); });
+  const r = resumes[rKey];
+  const list = a => a.map(x => `<div class="role">${esc(x[0])}<span>${esc(x[1])}</span></div>${Array.isArray(x[2]) ? `<ul>${x[2].map(b=>`<li>${esc(b)}</li>`).join("")}</ul>` : x[2] ? `<p style="margin:4px 0 0">${esc(x[2])}</p>` : ""}`).join("");
+  $("#panel").innerHTML = `
+    <div class="top"><div><h3>Cole Carrillo</h3><div style="color:var(--muted)">${esc(r.title)}</div></div>
+    <a class="btn primary" href="${esc(r.file)}" download>Download PDF</a></div>
+    <h4>Education</h4>
+    <div class="role">Boise State University, B.S. Games, Interactive Media &amp; Mobile<span>Expected Spring 2027</span></div>
+    <p style="margin:4px 0 0">Minor in Business; AI Literacy and Student Success Certificate. High Honors.</p>
+    <h4>Projects</h4>${list(r.projects)}
+    <h4>Skills</h4><ul>${r.skills.map(s=>`<li><strong>${esc(s[0])}:</strong> ${esc(s[1])}</li>`).join("")}</ul>
+    <h4>Experience</h4>${list(r.exp)}
+    ${r.lead && r.lead.length ? `<h4>Leadership</h4>${list(r.lead)}` : ""}`;
+}
+
+drawChips(); drawGrid(); drawResume();
+</script>
 </body>
 </html>
